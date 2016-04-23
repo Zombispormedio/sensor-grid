@@ -1,0 +1,21 @@
+{
+  "name": "sensor-grid",
+  "version": "1.0.0",
+  "description": "Sensor Grid Clients",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/Zombispormedio/sensor-grid"
+  },
+  "keywords": [
+    "sensor",
+    "node.js",
+    "websocket",
+    "arduino"
+  ],
+  "author": "Xavier Serrano",
+  "license": "ISC"
+}
