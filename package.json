@@ -17,5 +17,8 @@
     "arduino"
   ],
   "author": "Xavier Serrano",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "websocket": "^1.0.22"
+  }
 }
