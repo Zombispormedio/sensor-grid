@@ -71,4 +71,5 @@ client.on('connect', function(connection) {
     connection.send(JSON.stringify(credentials));
 });
 
-client.connect('ws://127.0.0.1:5065/sensor_grid', "", "http://localhost:5065");
+//client.connect('ws://smart-town-push.herokuapp.com/sensor_grid', "", "https://smart-town-push.herokuapp.com");
+client.connect('ws://localhost:5065/sensor_grid', "", "http://localhost:5065/sensor_grid");
