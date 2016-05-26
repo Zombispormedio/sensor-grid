@@ -3,20 +3,16 @@ var WebSocketClient = require('websocket').client;
 var client = new WebSocketClient();
 
 var credentials={
-  client_id:"a7e409d4-f433-4b80-5dd9-c0a49626d550",
-  client_secret:"aKuOcmIHnNmyFfJbGjhLruBUHyRCjQlHNcgJgHWOppVcpRU"
+  client_id:"7fc9e1d7-a757-4007-7826-b4c9b7c056b0",
+  client_secret:"BmJIOExtrRhBuDNGLMDEiHuJURQDFWfSkdMgHCHWeDLFbRj"
 }
 
 
 var sensorData={
     "data":[
         {
-            "node_id":"fa8c7695-3051-46ef-41c0-7006a9aa6df8",
+            "node_id":"273a8df9-d262-4979-600d-cb758d30627f",
             "value":"5254254"
-        },
-        {
-            "node_id":"4643d9ae-78c6-436d-4007-c24d2546d068",
-            "value":"5552"
         }
         ]
 }
@@ -71,5 +67,5 @@ client.on('connect', function(connection) {
     connection.send(JSON.stringify(credentials));
 });
 
-//client.connect('ws://smart-town-push.herokuapp.com/sensor_grid', "", "https://smart-town-push.herokuapp.com");
-client.connect('ws://localhost:5065/sensor_grid', "", "http://localhost:5065/sensor_grid");
+client.connect('ws://smart-town-push.herokuapp.com/sensor_grid', "", "https://smart-town-push.herokuapp.com");
+//client.connect('ws://localhost:5065/sensor_grid', "", "http://localhost:5065/sensor_grid");
