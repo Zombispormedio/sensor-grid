@@ -1,25 +1,58 @@
+var ENV=require("./env");
 var WebSocketClient = require('websocket').client;
 
-var client = new WebSocketClient();
 
-var credentials={
-  client_id:"7fc9e1d7-a757-4007-7826-b4c9b7c056b0",
-  client_secret:"BmJIOExtrRhBuDNGLMDEiHuJURQDFWfSkdMgHCHWeDLFbRj"
+var Create=function(onmessage){
+    
+    var obj={};
+
+    obj.client = new WebSocketClient();
+
+    obj.start=start(obj.client, onmessage);
+  
+    return obj;
 }
 
-
-var sensorData={
-    "data":[
-        {
-            "node_id":"273a8df9-d262-4979-600d-cb758d30627f",
-            "value":"5254254"
-        }
-        ]
+var connect=function(onmessage){
+    return function(connection){
+    console.log('WebSocket client connected');
+    connection.on('error', function(error) {
+        console.log("Connection Error: " + error.toString());
+    });
+    connection.on('close', function() {
+        console.log('echo-protocol Connection Closed');
+    });
+    
+    var sender={};
+  sender.send=function(obj){
+        connection.send(JSON.stringify(obj))
+    }
+    sender.close=function(){
+        connection.close();
+    }
+    
+    connection.on('message', Data(function(data){
+        console.log(data);
+         if(data.status==0 && data.type==="login"){
+          onmessage(sender);
+         }
+    }));
+    
+    sender.send(ENV.credentials);
+    
+    
+};
 }
-var interval=null;
 
-
-
+var start=function(client, onmessage){
+    return function(){
+        client.on('connectFailed', function(error) {
+            console.log('Connect Error: ' + error.toString());
+        });
+        client.on('connect', connect(onmessage));
+        client.connect(ENV.WS_HOST, "", ENV.PUSH_HOST);
+    };
+}
 
 function Data(cb){
   return function(message){
@@ -29,43 +62,7 @@ function Data(cb){
   }
 }
 
-client.on('connectFailed', function(error) {
-    console.log('Connect Error: ' + error.toString());
-});
-
-client.on('connect', function(connection) {
-    console.log('WebSocket client connected');
-    connection.on('error', function(error) {
-        console.log("Connection Error: " + error.toString());
-    });
-    connection.on('close', function() {
-        console.log('echo-protocol Connection Closed');
-    });
-    connection.on('message', Data(function(data){
-        if(data.status==0){
-          console.log(data);
-          if(interval==void 0){
-
-            interval=setInterval(function () {
-
-              connection.send(JSON.stringify(sensorData));
 
 
-            }, 5000);
+module.exports=Create;
 
-            setTimeout(function () {
-               clearInterval(interval);
-               connection.close();
-            }, 30000);
-
-          }
-
-
-        }
-    }));
-
-    connection.send(JSON.stringify(credentials));
-});
-
-client.connect('ws://smart-town-push.herokuapp.com/sensor_grid', "", "https://smart-town-push.herokuapp.com");
-//client.connect('ws://localhost:5065/sensor_grid', "", "http://localhost:5065/sensor_grid");
