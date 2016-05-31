@@ -1,9 +1,10 @@
-var ws = require("./ws");
+var mosquito = require("./mosquito");
 var env = require("./env");
-var sensor = require("./sensor")
+var sensor = require("./sensor");
 var conversion = require("./conversion.js");
 
-ws(function (conn) {
+
+mosquito(function (publish) {
 
     sensor(function (board) {
 
@@ -18,7 +19,7 @@ ws(function (conn) {
 
 
 
-        conn.send(obj);
+        publish(obj);
 
 
 
@@ -26,8 +27,3 @@ ws(function (conn) {
 
 
 }).start();
-
-
-
-
-
