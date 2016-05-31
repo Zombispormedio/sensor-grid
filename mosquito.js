@@ -1,12 +1,6 @@
 var mqtt = require('mqtt');
 var ENV = require("./env");
 
-
-
-
-
-
-console.log(ENV.topic)
 var create = function (node) {
   var obj = {};
   var client = mqtt.connect(ENV.MQTT, {
