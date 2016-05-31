@@ -3,7 +3,7 @@ var env = require("./env");
 var sensor = require("./sensor");
 var conversion = require("./conversion.js");
 
-require("unirest").get(ENV.PUSH_HOST).end();
+require("unirest").get(env.PUSH_HOST).end();
 
 mosquito(function (publish) {
 
