@@ -43,4 +43,4 @@ setInterval(function () {
         console.log(err);
     }
 
-}, 5000);
+}, env.M_TIME);
