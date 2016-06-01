@@ -34,3 +34,4 @@ node_modules
 /env.js
 /test
 /ecosystem.json
+/env_windows.js
