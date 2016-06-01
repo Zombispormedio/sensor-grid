@@ -28,11 +28,11 @@ setInterval(function(){
     var obj = {
         data: [{
             node_id: env.sensors2.temperature,
-            value: temperature
+            value: temperature+""
         },
         {
             node_id:env.sensors2.humidity,
-            value:humidity
+            value:humidity+""
         }]
     };
 
