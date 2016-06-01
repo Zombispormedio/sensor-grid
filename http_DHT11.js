@@ -19,9 +19,9 @@ var send = function (obj) {
 }
 
 
-try {
-    setInterval(function () {
 
+setInterval(function () {
+    try {
         var b = sensorLib.readSpec(11, 4);
         var temperature = b.temperature;
         var humidity = b.humidity;
@@ -39,9 +39,8 @@ try {
 
 
         send(obj);
+    } catch (err) {
+        console.log(err);
+    }
 
-
-    }, 5000);
-} catch (err) {
-    console.log(err);
-}
+}, 5000);
