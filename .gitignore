@@ -36,3 +36,4 @@ node_modules
 /ecosystem.json
 /env_windows.js
 
+/env_linux.js

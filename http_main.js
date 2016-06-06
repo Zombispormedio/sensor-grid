@@ -12,11 +12,12 @@ var headers={
 }
 
 var send=function(obj){
-    
     unirest.post(env.PUSH_HOST+"/sensor_grid")
     .headers(headers)
     .send(obj)
-    .end();
+    .end(function(res){
+		console.log(res.body);
+	});
     
 }
 
